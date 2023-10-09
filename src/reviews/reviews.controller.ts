@@ -18,6 +18,8 @@ import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { ReviewsService } from './reviews.service';
 import { Review } from '@prisma/client';
+import { Throttle } from '@nestjs/throttler';
+
 
 @ApiTags('reviews')
 @Controller('reviews')
@@ -42,6 +44,7 @@ export class ReviewsController {
 
   @ApiBearerAuth()
   @Post()
+  @Throttle({ default: { limit: 3, ttl: 60000 } })
   async create(
     @MetaData() meta: Meta,
     @Body() createReviewDto: CreateReviewDto,
