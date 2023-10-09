@@ -9,6 +9,7 @@ import { KafkaModule } from './kafka/kafka.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
+
 @Module({
   imports: [
     KafkaModule,
